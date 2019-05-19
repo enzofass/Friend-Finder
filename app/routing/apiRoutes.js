@@ -1,4 +1,4 @@
-let friendsData = require("../data/friends");
+const friendsData = require("../data/friends");
 
 module.exports = function(app) {
   // Basic route that send user the json object
@@ -8,6 +8,7 @@ module.exports = function(app) {
 
   app.post("/api/friends", function(req, res) {
     friendsData.push(req.body);
-    res.json(true);
+    // console.log(res.json);
+    res.json({ ok: true });
   });
 };
