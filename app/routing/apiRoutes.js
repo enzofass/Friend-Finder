@@ -10,5 +10,7 @@ module.exports = function(app) {
     friendsData.push(req.body);
     // console.log(res.json);
     res.json({ ok: true });
+
+    // friend-finder logic goes here
   });
 };
