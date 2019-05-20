@@ -8,7 +8,9 @@ module.exports = function(app) {
 
   app.post("/api/friends", function(req, res) {
     friendsData.push(req.body);
-    // console.log(res.json);
+
+    const userInput = res.body;
+    console.log(userInput);
     res.json({ ok: true });
 
     // friend-finder logic goes here

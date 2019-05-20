@@ -213,6 +213,54 @@
       </div>
     </div>
 
-    <script type="text/javascript"></script>
+    <script type="text/javascript">
+      // click listener for Submit Button
+      document.querySelector("#submit").addEventListener("click", function(e) {
+        e.preventDefault();
+        console.log("click is working!!");
+        const userInput = {
+          name: document.querySelector("#name").value,
+          photo: document.querySelector("#photo").value,
+          scores: [
+            document.querySelector("#q1").value,
+            document.querySelector("#q2").value,
+            document.querySelector("#q3").value,
+            document.querySelector("#q4").value,
+            document.querySelector("#q5").value,
+            document.querySelector("#q6").value,
+            document.querySelector("#q7").value,
+            document.querySelector("#q8").value,
+            document.querySelector("#q9").value,
+            document.querySelector("#q10").value
+          ]
+        };
+        console.log(userInput.scores.length);
+        verifySurvey(userInput);
+
+        // Function to check if any fields are blank
+        function verifySurvey(userIn) {
+          let surveyValid = false;
+          if ((userIn.name || userIn.photo) === "") {
+            return (surveyValid = false);
+          } else {
+            for (let i = 0; i < userIn.scores.length; i++) {
+              if (userIn.scores[i] === "") {
+                return (surveyValid = false);
+              } else {
+                surveyValid = true;
+              }
+            }
+            console.log("survey valid", surveyValid);
+            if (surveyValid === true) {
+              $.post("/api/friends", userIn, function(data) {
+                console.log("data", data);
+                
+              });
+            }
+            console.log(document.querySelector("#q1").value);
+          }
+        }
+      });
+    </script>
   </body>
 </html>
