@@ -6,7 +6,10 @@ module.exports = function(app) {
     res.json(friendsData);
   });
 
+
+  // post
   app.post("/api/friends", function(req, res) {
+
     const userInput = req.body;
     const arrayDifferences = [];
 
@@ -31,5 +34,6 @@ module.exports = function(app) {
     res.json(friendsData[bestMatchIndex]);
 
     friendsData.push(req.body);
+
   });
 };
