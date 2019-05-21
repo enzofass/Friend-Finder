@@ -218,6 +218,7 @@
       document.querySelector("#submit").addEventListener("click", function(e) {
         e.preventDefault();
         console.log("click is working!!");
+        // get value of fields in survey
         const userInput = {
           name: document.querySelector("#name").value,
           photo: document.querySelector("#photo").value,
@@ -235,43 +236,44 @@
           ]
         };
         console.log(userInput.scores.length);
+        // execute verifySurvey function
         verifySurvey(userInput);
-
-        // Function to check if any fields are blank
-        function verifySurvey(userIn) {
-          let surveyValid = false;
-          if ((userIn.name || userIn.photo) === "") {
-            return (surveyValid = false);
-          } else {
-            for (let i = 0; i < userIn.scores.length; i++) {
-              if (userIn.scores[i] === "") {
-                return (surveyValid = false);
-              } else {
-                surveyValid = true;
-              }
-            }
-            console.log("survey valid", surveyValid);
-            if (surveyValid === true) {
-              $.post("/api/friends", userIn, function(data) {
-                console.log("data", data);
-                if (data) {
-                  console.log("data", data);
-                  $("#results-modal").modal();
-                  // document.querySelector("#results-modal").style.display =
-                  //   "block";
-                  $("#match-name").text(data.name);
-                  $("#match-img").attr("src", data.photo);
-                  // document.querySelector("#match-name").innerHTML = data.name;
-                  // document.querySelector("#match-img").innerHTML = data.photo;
-                }
-              });
-            }
-
-            console.log(document.querySelector("#q1").value);
-          }
-
-        }
       });
+
+      // Function to check if any fields are blank
+      function verifySurvey(userIn) {
+        let surveyValid = false;
+        // if survey is valid show friend match
+        if (userIn.name === "" || userIn.photo === "") {
+          surveyValid = false;
+        } else {
+          for (let i = 0; i < userIn.scores.length; i++) {
+            if (userIn.scores[i] === "") {
+              surveyValid = false;
+            } else {
+              surveyValid = true;
+            }
+          }
+        }
+        console.log("survey valid", surveyValid);
+        if (surveyValid === true) {
+          $.post("/api/friends", userIn, function(data) {
+            console.log("data", data);
+            if (data) {
+              console.log("data", data);
+              $("#results-modal").modal();
+              // document.querySelector("#results-modal").style.display =
+              //   "block";
+              $("#match-name").text(data.name);
+              $("#match-photo").attr("src", data.photo);
+              // document.querySelector("#match-name").innerHTML = data.name;
+              // document.querySelector("#match-img").innerHTML = data.photo;
+            }
+          });
+        } else {
+          alert("Pleae complete survey before you submit!");
+        }
+      }
     </script>
   </body>
 </html>
