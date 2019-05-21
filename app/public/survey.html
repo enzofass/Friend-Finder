@@ -254,7 +254,16 @@
             if (surveyValid === true) {
               $.post("/api/friends", userIn, function(data) {
                 console.log("data", data);
-                
+                if (data) {
+                  console.log("data", data);
+                  $("#results-modal").modal();
+                  // document.querySelector("#results-modal").style.display =
+                  //   "block";
+                  $("#match-name").text(data.name);
+                  $("#match-img").attr("src", data.photo);
+                  // document.querySelector("#match-name").innerHTML = data.name;
+                  // document.querySelector("#match-img").innerHTML = data.photo;
+                }
               });
             }
             console.log(document.querySelector("#q1").value);
