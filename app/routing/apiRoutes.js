@@ -23,18 +23,18 @@ module.exports = function(app) {
       }
       // push total difference into array for each friend
       arrayDifferences.push(totalDifference);
-
-      console.log(arrayDifferences);
     }
     // best match is determined by lowest difference during compare
     // grab index of lowest value
     const bestMatchIndex = arrayDifferences.indexOf(
       Math.min(...arrayDifferences)
     );
+
     console.log(
       friendsData[bestMatchIndex].name,
       friendsData[bestMatchIndex].photo
     );
+
     // return best match json
     res.json(friendsData[bestMatchIndex]);
     // push current user to API

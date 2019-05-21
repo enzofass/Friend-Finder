@@ -217,7 +217,10 @@
       // click listener for Submit Button
       document.querySelector("#submit").addEventListener("click", function(e) {
         e.preventDefault();
+
         console.log("click is working!!");
+
+
         // get value of fields in survey
         const userInput = {
           name: document.querySelector("#name").value,
@@ -235,10 +238,13 @@
             document.querySelector("#q10").value
           ]
         };
+
         console.log(userInput.scores.length);
+
         // execute verifySurvey function
         verifySurvey(userInput);
       });
+
 
       // Function to check if any fields are blank
       function verifySurvey(userIn) {
@@ -252,6 +258,8 @@
               surveyValid = false;
             } else {
               surveyValid = true;
+
+
             }
           }
         }
