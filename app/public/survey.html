@@ -242,7 +242,7 @@
           let surveyValid = false;
           if (userIn.name == "" || userIn.photo == "") {
             surveyValid = false;
-
+          } else {
             for (let i = 0; i < userIn.scores.length; i++) {
               if (userIn.scores[i] === "") {
                 surveyValid = false;
@@ -250,22 +250,22 @@
                 surveyValid = true;
               }
             }
-            // if survey is valid show friend match
-            if (surveyValid === true) {
-              $.post("/api/friends", userIn, function(data) {
-                if (data) {
-                  $("#results-modal").modal();
-                  // document.querySelector("#results-modal").style.display =
-                  //   "block";
-                  $("#match-name").text(data.name);
-                  $("#match-img").attr("src", data.photo);
-                  // document.querySelector("#match-name").innerHTML = data.name;
-                  // document.querySelector("#match-img").innerHTML = data.photo;
-                }
-              });
-            } else {
-              alert("Please complete the survey to continue");
-            }
+          }
+          // if survey is valid show friend match
+          if (surveyValid === true) {
+            $.post("/api/friends", userIn, function(data) {
+              if (data) {
+                $("#results-modal").modal();
+                // document.querySelector("#results-modal").style.display =
+                //   "block";
+                $("#match-name").text(data.name);
+                $("#match-img").attr("src", data.photo);
+                // document.querySelector("#match-name").innerHTML = data.name;
+                // document.querySelector("#match-img").innerHTML = data.photo;
+              }
+            });
+          } else {
+            alert("Please complete the survey to continue");
           }
         }
       });
