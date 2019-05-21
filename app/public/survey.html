@@ -217,7 +217,7 @@
       // click listener for Submit Button
       document.querySelector("#submit").addEventListener("click", function(e) {
         e.preventDefault();
-        console.log("click is working!!");
+        // get value of fields in survey
         const userInput = {
           name: document.querySelector("#name").value,
           photo: document.querySelector("#photo").value,
@@ -234,28 +234,26 @@
             document.querySelector("#q10").value
           ]
         };
-        console.log(userInput.scores.length);
+        // execute verifySurvey function
         verifySurvey(userInput);
 
         // Function to check if any fields are blank
         function verifySurvey(userIn) {
           let surveyValid = false;
-          if ((userIn.name || userIn.photo) === "") {
-            return (surveyValid = false);
-          } else {
+          if (userIn.name == "" || userIn.photo == "") {
+            surveyValid = false;
+
             for (let i = 0; i < userIn.scores.length; i++) {
               if (userIn.scores[i] === "") {
-                return (surveyValid = false);
+                surveyValid = false;
               } else {
                 surveyValid = true;
               }
             }
-            console.log("survey valid", surveyValid);
+            // if survey is valid show friend match
             if (surveyValid === true) {
               $.post("/api/friends", userIn, function(data) {
-                console.log("data", data);
                 if (data) {
-                  console.log("data", data);
                   $("#results-modal").modal();
                   // document.querySelector("#results-modal").style.display =
                   //   "block";
@@ -265,11 +263,10 @@
                   // document.querySelector("#match-img").innerHTML = data.photo;
                 }
               });
+            } else {
+              alert("Please complete the survey to continue");
             }
-
-            console.log(document.querySelector("#q1").value);
           }
-
         }
       });
     </script>
