@@ -90,6 +90,7 @@
     </div>
 
     <script type="text/javascript">
+    // Add questions to array
       const questionsArr = [
         "##",
         "Your mind is always buzzing with unexplored ideas and plans.",
@@ -103,8 +104,9 @@
         "You think that everyone’s views should be respected regardless of whether they are supported by facts or not.",
         "You feel more energetic after spending time with a group of people."
       ];
-
+      // renders html for questions to DOM
       renderQuestions(questionsArr);
+      
       // click listener for Submit Button
       document.querySelector("#submit").addEventListener("click", function(e) {
         e.preventDefault();
@@ -147,12 +149,8 @@
             $.post("/api/friends", userIn, function(data) {
               if (data) {
                 $("#results-modal").modal();
-                // document.querySelector("#results-modal").style.display =
-                //   "block";
                 $("#match-name").text(data.name);
                 $("#match-img").attr("src", data.photo);
-                // document.querySelector("#match-name").innerHTML = data.name;
-                // document.querySelector("#match-img").innerHTML = data.photo;
               }
             });
             // clear survey
@@ -174,6 +172,7 @@
               document.querySelector("#" + element).value = "";
             });
           } else {
+            // If any fields are blank alert user to complete survey
             alert("Please complete the survey to continue");
           }
         }
